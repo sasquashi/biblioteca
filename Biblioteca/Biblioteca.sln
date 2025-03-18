@@ -25,6 +25,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Infra.Data", "Bi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Infra.IoC", "Biblioteca.Infra.IoC\Biblioteca.Infra.IoC.csproj", "{E36B4ABB-7B0A-425D-BBC1-01F7C1F4B57B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05.01.01 - scripts sql", "05.01.01 - scripts sql", "{95B3302D-5A4B-461B-80CF-7B0CB7C23CA6}"
+	ProjectSection(SolutionItems) = preProject
+		script.sql = script.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +68,7 @@ Global
 		{B91D5EC2-4D6C-402E-91B9-F745E57C4DF6} = {71539E2A-BB52-410B-AF8F-1F461FB9921C}
 		{C66F7421-5910-4DCB-A7BC-B994E3D88D5D} = {EC81380A-7E09-428B-B22F-389C8C88DE8B}
 		{E36B4ABB-7B0A-425D-BBC1-01F7C1F4B57B} = {CDB9F18D-7771-42D4-A85E-1BF89D49A1B0}
+		{95B3302D-5A4B-461B-80CF-7B0CB7C23CA6} = {EC81380A-7E09-428B-B22F-389C8C88DE8B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11B37332-218F-46D9-98FA-D84F01511948}
