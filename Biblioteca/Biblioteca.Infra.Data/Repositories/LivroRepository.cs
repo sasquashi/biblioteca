@@ -7,7 +7,8 @@ namespace Biblioteca.Infra.Data.Repositories
 {
     public class LivroRepository : BaseRepository<Livro>, ILivroRepository
     {
-        public LivroRepository(BibliotecaDbContext context) : base(context) { }
+        public LivroRepository(BibliotecaDbContext context) 
+            : base(context) { }
 
         public override async Task<Livro> GetByIdAsync(int id)
         {

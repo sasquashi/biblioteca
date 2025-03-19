@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Application.Services
 {
-    public abstract class BaseService<T, TDto> where T : class where TDto : class
+    public abstract class BaseService<T, TDto> where T 
+        : class where TDto 
+        : class
     {
         protected readonly IRepositoryBase<T> _repository;
 

@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Infra.Data.Repositories
 {
-    public class BaseRepository<T> : IRepositoryBase<T> where T : class
+    public class BaseRepository<T>
+        : IRepositoryBase<T> where T
+        : class
     {
         protected readonly BibliotecaDbContext _context;
 

@@ -11,7 +11,8 @@ namespace Biblioteca.Application.Services
 {
     public class AssuntoService : BaseService<Assunto, AssuntoDTO>
     {
-        public AssuntoService(IAssuntoRepository assuntoRepository) : base(assuntoRepository) { }
+        public AssuntoService(IAssuntoRepository assuntoRepository) 
+            : base(assuntoRepository) { }
 
         protected override AssuntoDTO MapToDto(Assunto assunto)
         {

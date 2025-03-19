@@ -6,6 +6,7 @@ namespace Biblioteca.Infra.Data.Repositories
 {
     public class AutorRepository : BaseRepository<Autor>, IAutorRepository
     {
-        public AutorRepository(BibliotecaDbContext context) : base(context) { }
+        public AutorRepository(BibliotecaDbContext context) 
+            : base(context) { }
     }
 }

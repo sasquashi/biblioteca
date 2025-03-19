@@ -6,6 +6,7 @@ namespace Biblioteca.Infra.Data.Repositories
 {
     public class VendaRepository : BaseRepository<Venda>, IVendaRepository
     {
-        public VendaRepository(BibliotecaDbContext context) : base(context) { }
+        public VendaRepository(BibliotecaDbContext context) 
+            : base(context) { }
     }
 }
