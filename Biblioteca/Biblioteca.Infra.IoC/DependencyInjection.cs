@@ -18,11 +18,19 @@ namespace Biblioteca.Infra.IoC
             services.AddScoped<IAutorRepository, AutorRepository>();
             services.AddScoped<IAssuntoRepository, AssuntoRepository>();
             services.AddScoped<IVendaRepository, VendaRepository>();
+            services.AddScoped<IFormaCompraRepository, FormaCompraRepository>();
+            services.AddScoped<IFormaPagamentoRepository, FormaPagamentoRepository>();
+            services.AddScoped<IHistoricoVendaRepository, HistoricoVendaRepository>();
+            services.AddScoped<IHistoricoAcaoRepository, HistoricoAcaoRepository>();
 
             services.AddScoped<LivroService>();
             services.AddScoped<AutorService>();
             services.AddScoped<AssuntoService>();
             services.AddScoped<VendaService>();
+            services.AddScoped<FormaCompraService>();
+            services.AddScoped<FormaPagamentoService>();
+            services.AddScoped<HistoricoVendaService>();
+            services.AddScoped<HistoricoAcaoService>();
 
             return services;
         }
