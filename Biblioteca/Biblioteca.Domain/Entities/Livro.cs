@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace Biblioteca.Domain.Entities
 {
     public class Livro
     {
+        [Key]
         public int CodL { get; set; }
         public string Titulo { get; set; }
         public string Editora { get; set; }

@@ -20,6 +20,27 @@ namespace Biblioteca.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Livro>().HasKey(l => l.CodL);
+            modelBuilder.Entity<Autor>().HasKey(a => a.CodAU);
+            modelBuilder.Entity<Assunto>().HasKey(a => a.CodAS);
+            modelBuilder.Entity<FormaCompra>().HasKey(fc => fc.CodFC);
+            modelBuilder.Entity<FormaPagamento>().HasKey(fp => fp.CodFP);
+            modelBuilder.Entity<Venda>().HasKey(v => v.CodV);
+            modelBuilder.Entity<HistoricoVenda>().HasKey(hv => hv.CodHV);
+            modelBuilder.Entity<HistoricoAcao>().HasKey(ha => ha.CodHA);
+
+            modelBuilder.Entity<Livro>().ToTable("Livro");
+            modelBuilder.Entity<Autor>().ToTable("Autor");
+            modelBuilder.Entity<Assunto>().ToTable("Assunto");
+            modelBuilder.Entity<LivroAutor>().ToTable("Livro_Autor");
+            modelBuilder.Entity<LivroAssunto>().ToTable("Livro_Assunto");
+            modelBuilder.Entity<FormaCompra>().ToTable("FormaCompra");
+            modelBuilder.Entity<FormaPagamento>().ToTable("FormaPagamento");
+            modelBuilder.Entity<Venda>().ToTable("Venda");
+            modelBuilder.Entity<HistoricoVenda>().ToTable("HistoricoVenda");
+            modelBuilder.Entity<HistoricoAcao>().ToTable("HistoricoAcao");
+
+
             modelBuilder.Entity<LivroAutor>()
                 .HasKey(la => new { la.Livro_CodL, la.Autor_CodAu });
             modelBuilder.Entity<LivroAutor>()
