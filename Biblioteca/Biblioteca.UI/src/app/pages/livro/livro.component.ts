@@ -31,7 +31,7 @@ export class LivroComponent extends BaseComponent<Livro> {
       edicao: 0,
       anoPublicacao: '',
       valor: 0,
-      dataCadastro: '',
+      dataCadastro: new Date().toISOString().split('T')[0],
       autorIds: [],
       assuntoIds: [],
     };
@@ -54,5 +54,20 @@ export class LivroComponent extends BaseComponent<Livro> {
     this.assuntoService
       .getAll()
       .subscribe({ next: (data) => (this.assuntos = data) });
+  }
+
+  addNewItem(): void {
+    this.selectedItem = { 
+      codL: 0, 
+      titulo: '', 
+      editora: '', 
+      edicao: 0, 
+      anoPublicacao: '', 
+      valor: 0, 
+      dataCadastro: new Date().toISOString().split('T')[0], // Data atual
+      autorIds: [], 
+      assuntoIds: [] 
+    };
+    this.isEdit = false;
   }
 }

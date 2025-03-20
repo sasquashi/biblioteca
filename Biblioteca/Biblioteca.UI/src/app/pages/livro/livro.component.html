@@ -2,20 +2,7 @@
   <h2>Livros</h2>
   <button
     class="btn btn-primary mb-3"
-    (click)="
-      selectedItem = {
-        codL: 0,
-        titulo: '',
-        editora: '',
-        edicao: 0,
-        anoPublicacao: '',
-        valor: 0,
-        dataCadastro: '',
-        autorIds: [],
-        assuntoIds: []
-      };
-      isEdit = false
-    "
+    (click)="addNewItem();"
   >
     Adicionar Livro
   </button>
@@ -66,6 +53,7 @@
           class="form-control"
           [(ngModel)]="selectedItem.titulo"
           name="titulo"
+          maxlength="40"
           required
         />
       </div>
@@ -76,6 +64,7 @@
           class="form-control"
           [(ngModel)]="selectedItem.editora"
           name="editora"
+          maxlength="40"
           required
         />
       </div>
