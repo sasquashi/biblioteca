@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <h2>Formas de Pagamento</h2>
+    <button class="btn btn-primary mb-3" (click)="selectedItem = { codFP: 0, descricao: '' }; isEdit = false">Adicionar Forma de Pagamento</button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let forma of items">
+          <td>{{ forma.codFP }}</td>
+          <td>{{ forma.descricao }}</td>
+          <td>
+            <button class="btn btn-sm btn-warning" (click)="editItem(forma.codFP)">Editar</button>
+            <button class="btn btn-sm btn-danger ms-2" (click)="deleteItem(forma.codFP)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="selectedItem" class="mt-4">
+        <h3>{{ isEdit ? 'Editar Forma de Pagamento' : 'Adicionar Forma de Pagamento' }}</h3>
+        <form (ngSubmit)="saveItem(selectedItem!)">
+        <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedItem.descricao" name="descricao" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="button" class="btn btn-secondary ms-2" (click)="resetForm()">Cancelar</button>
+        </form>
+    </div>
+</div>
