@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class BaseService<T> {
+export abstract class BaseService<T> {
   protected apiUrl = 'https://localhost:44392/api';
 
   constructor(protected http: HttpClient, protected endpoint: string) {}

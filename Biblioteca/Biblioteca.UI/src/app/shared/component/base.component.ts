@@ -7,7 +7,7 @@ export abstract class BaseComponent<T> implements OnInit {
   items: T[] = [];
   selectedItem: T | null = null;
   isEdit = false;
-
+  
   constructor(
     protected service: BaseService<T>,
     protected router: Router,

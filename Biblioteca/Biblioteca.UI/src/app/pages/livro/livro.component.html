@@ -1,0 +1,149 @@
+<div class="container mt-4">
+  <h2>Livros</h2>
+  <button
+    class="btn btn-primary mb-3"
+    (click)="
+      selectedItem = {
+        codL: 0,
+        titulo: '',
+        editora: '',
+        edicao: 0,
+        anoPublicacao: '',
+        valor: 0,
+        dataCadastro: '',
+        autorIds: [],
+        assuntoIds: []
+      };
+      isEdit = false
+    "
+  >
+    Adicionar Livro
+  </button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Título</th>
+        <th>Editora</th>
+        <th>Edição</th>
+        <th>Ano</th>
+        <th>Valor</th>
+        <th>Data Cadastro</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let livro of items">
+        <td>{{ livro.codL }}</td>
+        <td>{{ livro.titulo }}</td>
+        <td>{{ livro.editora }}</td>
+        <td>{{ livro.edicao }}</td>
+        <td>{{ livro.anoPublicacao }}</td>
+        <td>{{ livro.valor | currency : "BRL" }}</td>
+        <td>{{ livro.dataCadastro | date : "dd/MM/yyyy" }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" (click)="editItem(livro.codL)">
+            Editar
+          </button>
+          <button
+            class="btn btn-sm btn-danger ms-2"
+            (click)="deleteItem(livro.codL)"
+          >
+            Excluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="selectedItem" class="mt-4">
+    <h3>{{ isEdit ? "Editar Livro" : "Adicionar Livro" }}</h3>
+    <form (ngSubmit)="saveItem(selectedItem!)">
+      <div class="mb-3">
+        <label class="form-label">Título</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="selectedItem.titulo"
+          name="titulo"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Editora</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="selectedItem.editora"
+          name="editora"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Edição</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="selectedItem.edicao"
+          name="edicao"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Ano de Publicação</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="selectedItem.anoPublicacao"
+          name="anoPublicacao"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Valor</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="selectedItem.valor"
+          name="valor"
+          step="0.01"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Autores</label>
+        <select
+          multiple
+          class="form-control"
+          [(ngModel)]="selectedItem.autorIds"
+          name="autorIds"
+        >
+          <option *ngFor="let autor of autores" [value]="autor.codAu">
+            {{ autor.nome }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Assuntos</label>
+        <select
+          multiple
+          class="form-control"
+          [(ngModel)]="selectedItem.assuntoIds"
+          name="assuntoIds"
+        >
+          <option *ngFor="let assunto of assuntos" [value]="assunto.codAs">
+            {{ assunto.descricao }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button
+        type="button"
+        class="btn btn-secondary ms-2"
+        (click)="resetForm()"
+      >
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>
