@@ -31,6 +31,11 @@ namespace Biblioteca.Application.Services
             return historicos.Select(MapToDto).ToList();
         }
 
+        public async Task AddAsync(HistoricoVenda historico)
+        {
+            await _historicoVendaRepository.AddAsync(historico);
+        }
+
         private HistoricoVendaDTO MapToDto(HistoricoVenda historico)
         {
             if (historico == null) return null;

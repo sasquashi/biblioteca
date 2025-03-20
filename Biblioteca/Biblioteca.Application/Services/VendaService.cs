@@ -11,8 +11,11 @@ namespace Biblioteca.Application.Services
 {
     public class VendaService : BaseService<Venda, VendaDTO>
     {
-        public VendaService(IVendaRepository vendaRepository) 
-            : base(vendaRepository) { }
+        public VendaService(
+            IVendaRepository vendaRepository,
+            HistoricoAcaoService historicoAcaoService,
+            HistoricoVendaService historicoVendaService) 
+            : base(vendaRepository, historicoAcaoService, historicoVendaService) { }
 
         protected override VendaDTO MapToDto(Venda venda)
         {

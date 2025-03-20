@@ -11,8 +11,11 @@ namespace Biblioteca.Application.Services
 {
     public class FormaPagamentoService : BaseService<FormaPagamento, FormaPagamentoDTO>
     {
-        public FormaPagamentoService(IFormaPagamentoRepository formaPagamentoRepository) 
-            : base(formaPagamentoRepository) { }
+        public FormaPagamentoService(
+            IFormaPagamentoRepository formaPagamentoRepository,
+            HistoricoAcaoService historicoAcaoService,
+            HistoricoVendaService historicoVendaService)  
+            : base(formaPagamentoRepository, historicoAcaoService, historicoVendaService) { }
 
         protected override FormaPagamentoDTO MapToDto(FormaPagamento formaPagamento)
         {

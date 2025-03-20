@@ -6,8 +6,12 @@ namespace Biblioteca.Application.Services
 {
     public class LivroService : BaseService<Livro, LivroDTO>
     {
-        public LivroService(ILivroRepository livroRepository) 
-            : base(livroRepository) { }
+        public LivroService(
+            ILivroRepository livroRepository, 
+            HistoricoAcaoService historicoAcaoService,
+            HistoricoVendaService historicoVendaService)
+            : base(livroRepository, historicoAcaoService, historicoVendaService)
+        { }
 
         protected override LivroDTO MapToDto(Livro livro)
         {

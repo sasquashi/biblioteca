@@ -16,6 +16,6 @@ namespace Biblioteca.Domain.Entities
         public string DescricaoAcao { get; set; }
         public DateTime DataAcao { get; set; }
 
-        //public string UsuarioAcao { get; set; }
+        public string UsuarioAcao { get; set; }
     }
 }

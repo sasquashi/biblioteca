@@ -11,8 +11,11 @@ namespace Biblioteca.Application.Services
 {
     public class FormaCompraService : BaseService<FormaCompra, FormaCompraDTO>
     {
-        public FormaCompraService(IFormaCompraRepository formaCompraRepository) 
-            : base(formaCompraRepository) { }
+        public FormaCompraService(
+            IFormaCompraRepository formaCompraRepository,
+            HistoricoAcaoService historicoAcaoService,
+            HistoricoVendaService historicoVendaService)
+            : base(formaCompraRepository, historicoAcaoService, historicoVendaService) { }
 
         protected override FormaCompraDTO MapToDto(FormaCompra formaCompra)
         {

@@ -11,8 +11,11 @@ namespace Biblioteca.Application.Services
 {
     public class AutorService : BaseService<Autor, AutorDTO>
     {
-        public AutorService(IAutorRepository autorRepository) 
-            : base(autorRepository) { }
+        public AutorService(
+            IAutorRepository autorRepository,
+            HistoricoAcaoService historicoAcaoService,
+            HistoricoVendaService historicoVendaService)
+            : base(autorRepository, historicoAcaoService, historicoVendaService) { }
 
         protected override AutorDTO MapToDto(Autor autor)
         {
