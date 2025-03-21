@@ -46,6 +46,8 @@
           class="form-control"
           [(ngModel)]="selectedItem.nome"
           name="nome"
+          maxlength="40"
+          [ngClass]="{'is-invalid': validationErrors.includes('nome')}"
           required
         />
       </div>

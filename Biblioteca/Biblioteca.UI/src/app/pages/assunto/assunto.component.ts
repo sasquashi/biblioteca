@@ -16,8 +16,8 @@ export class AssuntoComponent extends BaseComponent<Assunto> {
     router: Router,
     snackBar: MatSnackBar
     ) {
-    super(service, router, 'assunto', snackBar);
-    this.selectedItem = { codAs: 0, descricao: '' };
+    super(service, router, 'assunto', snackBar, ['descricao']);
+    this.selectedItem = { codAs: 0, descricao: ''};
   }
   override ngOnInit(): void {
     this.resetForm();

@@ -29,13 +29,13 @@ export class VendaComponent extends BaseComponent<Venda> {
     private formaPagamentoService: FormaPagamentoService,
     snackBar: MatSnackBar
   ) {
-    super(service, router, 'venda', snackBar);
+    super(service, router, 'venda', snackBar, ['codFP', 'codFC', 'codL', 'valorLivro', 'teveDesconto', 'valorFinal', 'valorFinal']);
     this.selectedItem = {
       codV: 0,
       codFC: 0,
       codL: 0,
       valorLivro: 0,
-      teveDesconto: false,
+      teveDesconto: undefined,
       valorFinal: 0,
       dataVenda: new Date().toISOString().split('T')[0],
       codFP: 0,
@@ -89,7 +89,7 @@ export class VendaComponent extends BaseComponent<Venda> {
       codFC: 0,
       codL: 0,
       valorLivro: 0,
-      teveDesconto: false,
+      teveDesconto: undefined,
       valorFinal: 0,
       dataVenda: new Date().toISOString().split('T')[0],
       codFP: 0,

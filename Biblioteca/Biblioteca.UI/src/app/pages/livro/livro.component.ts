@@ -25,7 +25,7 @@ export class LivroComponent extends BaseComponent<Livro> {
     private assuntoService: AssuntoService,
     snackBar: MatSnackBar
   ) {
-    super(service, router, 'livro', snackBar);
+    super(service, router, 'livro', snackBar, ['titulo','editora','edicao', 'anoPublicacao', 'valor', 'autorIds', 'assuntoIds']);
     this.selectedItem = {
       codL: 0,
       titulo: '',

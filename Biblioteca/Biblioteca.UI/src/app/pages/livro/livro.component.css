@@ -15,3 +15,7 @@
 .actions-column button {
   margin-left: 5px;
 }
+.is-invalid {
+  border-color: red !important;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}

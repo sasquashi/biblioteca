@@ -1,73 +1,138 @@
 <div class="container mt-4">
-    <h2>Vendas</h2>
-    <button class="btn btn-primary mb-3" (click)="addNewItem();">Adicionar Venda</button>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Livro</th>
-          <th>Forma Compra</th>
-          <th>Valor Livro</th>
-          <th>Desconto</th>
-          <th>Valor Final</th>
-          <th>Data Venda</th>
-          <th>Forma Pagamento</th>
-          <th class="actions-header">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let venda of items">
-          <td>{{ venda.codV }}</td>
-          <td>{{ getLivroTitulo(venda.codL) }}</td>
-          <td>{{ getFormaCompraDescricao(venda.codFC) }}</td>
-          <td>{{ venda.valorLivro | currency:'BRL' }}</td>
-          <td>{{ venda.teveDesconto ? 'Sim' : 'Não' }}</td>
-          <td>{{ venda.valorFinal | currency:'BRL' }}</td>
-          <td>{{ venda.dataVenda | date:'dd/MM/yyyy' }}</td>
-          <td>{{ getFormaPagamentoDescricao(venda.codFP) }}</td>
-          <td class="actions-column">
-            <button class="btn btn-sm btn-warning" (click)="editItem(venda.codV)">Editar</button>
-            <button class="btn btn-sm btn-danger ms-2" (click)="deleteItem(venda.codV)">Excluir</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <div *ngIf="selectedItem" class="mt-4">
-      <h3>{{ isEdit ? 'Editar Venda' : 'Adicionar Venda' }}</h3>
-      <form (ngSubmit)="saveItem(selectedItem!)">
-        <div class="mb-3">
-          <label class="form-label">Livro</label>
-          <select class="form-control" [(ngModel)]="selectedItem.codL" name="codL" required>
-            <option *ngFor="let livro of livros" [value]="livro.codL">{{ livro.titulo }}</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Forma de Compra</label>
-          <select class="form-control" [(ngModel)]="selectedItem.codFC" name="codFC" required>
-            <option *ngFor="let forma of formasCompra" [value]="forma.codFC">{{ forma.descricao }}</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Valor Livro</label>
-          <input type="number" class="form-control" [(ngModel)]="selectedItem.valorLivro" name="valorLivro" step="0.01" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Teve Desconto</label>
-          <input type="checkbox" [(ngModel)]="selectedItem.teveDesconto" name="teveDesconto">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Valor Final</label>
-          <input type="number" class="form-control" [(ngModel)]="selectedItem.valorFinal" name="valorFinal" step="0.01" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Forma de Pagamento</label>
-          <select class="form-control" [(ngModel)]="selectedItem.codFP" name="codFP" required>
-            <option *ngFor="let forma of formasPagamento" [value]="forma.codFP">{{ forma.descricao }}</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        <button type="button" class="btn btn-secondary ms-2" (click)="resetForm()">Cancelar</button>
-      </form>
-    </div>
+  <h2>Vendas</h2>
+  <button class="btn btn-primary mb-3" (click)="addNewItem()">
+    Adicionar Venda
+  </button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Livro</th>
+        <th>Forma Compra</th>
+        <th>Valor Livro</th>
+        <th>Desconto</th>
+        <th>Valor Final</th>
+        <th>Data Venda</th>
+        <th>Forma Pagamento</th>
+        <th class="actions-header">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let venda of items">
+        <td>{{ venda.codV }}</td>
+        <td>{{ getLivroTitulo(venda.codL) }}</td>
+        <td>{{ getFormaCompraDescricao(venda.codFC) }}</td>
+        <td>{{ venda.valorLivro | currency : "BRL" }}</td>
+        <td>{{ venda.teveDesconto ? "Sim" : "Não" }}</td>
+        <td>{{ venda.valorFinal | currency : "BRL" }}</td>
+        <td>{{ venda.dataVenda | date : "dd/MM/yyyy" }}</td>
+        <td>{{ getFormaPagamentoDescricao(venda.codFP) }}</td>
+        <td class="actions-column">
+          <button class="btn btn-sm btn-warning" (click)="editItem(venda.codV)">
+            Editar
+          </button>
+          <button
+            class="btn btn-sm btn-danger ms-2"
+            (click)="deleteItem(venda.codV)"
+          >
+            Excluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="selectedItem" class="mt-4">
+    <h3>{{ isEdit ? "Editar Venda" : "Adicionar Venda" }}</h3>
+    <form (ngSubmit)="saveItem(selectedItem!)">
+      <div class="mb-3">
+        <label class="form-label">Livro</label>
+        <select
+          class="form-control"
+          [(ngModel)]="selectedItem.codL"
+          name="codL"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('codL') }"
+          required
+        >
+          <option *ngFor="let livro of livros" [value]="livro.codL">
+            {{ livro.titulo }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Forma de Compra</label>
+        <select
+          class="form-control"
+          [(ngModel)]="selectedItem.codFC"
+          name="codFC"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('codFC') }"
+          required
+        >
+          <option *ngFor="let forma of formasCompra" [value]="forma.codFC">
+            {{ forma.descricao }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Valor Livro</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="selectedItem.valorLivro"
+          name="valorLivro"
+          step="0.01"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('valorLivro') }"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="teveDesconto">Teve Desconto</label>
+        <select
+          id="teveDesconto"
+          [(ngModel)]="selectedItem.teveDesconto"
+          name="teveDesconto"
+          class="form-control teve-desconto-select"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('teveDesconto')}"
+        >
+          <option value="undefined">Selecione</option>
+          <option value="true">Sim</option>
+          <option value="false">Não</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Valor Final</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="selectedItem.valorFinal"
+          name="valorFinal"
+          step="0.01"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('valorFinal') }"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Forma de Pagamento</label>
+        <select
+          class="form-control"
+          [(ngModel)]="selectedItem.codFP"
+          name="codFP"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('codFP') }"
+          required
+        >
+          <option *ngFor="let forma of formasPagamento" [value]="forma.codFP">
+            {{ forma.descricao }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button
+        type="button"
+        class="btn btn-secondary ms-2"
+        (click)="resetForm()"
+      >
+        Cancelar
+      </button>
+    </form>
   </div>
+</div>

@@ -3,7 +3,7 @@ export interface Venda {
   codFC: number;
   codL: number;
   valorLivro: number;
-  teveDesconto: boolean;
+  teveDesconto?: boolean;
   valorFinal: number;
   dataVenda: string;
   codFP: number;

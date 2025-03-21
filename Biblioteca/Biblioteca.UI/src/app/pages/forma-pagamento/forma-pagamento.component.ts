@@ -14,7 +14,7 @@ export class FormaPagamentoComponent extends BaseComponent<FormaPagamento> {
     service: FormaPagamentoService, 
     router: Router,
     snackBar: MatSnackBar) {
-    super(service, router, 'forma de pagamento', snackBar);
+    super(service, router, 'forma de pagamento', snackBar, ['descricao']);
     this.selectedItem = { codFP: 0, descricao: '' };
   }
   override ngOnInit(): void {

@@ -10,12 +10,14 @@ export abstract class BaseComponent<T> implements OnInit {
   selectedItem: T | null = null;
   isEdit = false;
   isLoading = false;
+  validationErrors: string[] = [];
 
   constructor(
     protected service: BaseService<T>,
     protected router: Router,
     protected routePrefix: string,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    protected requiredFields: string[] = []
   ) {
     SnackBarMessageComponent.setSnackBar(this.snackBar);
   }
@@ -36,10 +38,10 @@ export abstract class BaseComponent<T> implements OnInit {
         });
         this.isLoading = false;
       },
-      error: (err) =>{
+      error: (err) => {
         console.error(`Erro ao carregar ${this.routePrefix}:`, err);
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -50,10 +52,12 @@ export abstract class BaseComponent<T> implements OnInit {
         this.selectedItem = data;
         this.isEdit = true;
         this.isLoading = false;
+        this.validationErrors = [];
       },
-      error: (err) => {console.error('Erro ao carregar item:', err);
+      error: (err) => {
+        console.error('Erro ao carregar item:', err);
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -63,18 +67,25 @@ export abstract class BaseComponent<T> implements OnInit {
       this.service.delete(id).subscribe({
         next: () => {
           this.isLoading = false;
-          this.loadItems()
-          SnackBarMessageComponent.show(this.routePrefix + ' excluído com sucesso', 'error');
+          this.loadItems();
+          SnackBarMessageComponent.show(
+            this.routePrefix + ' excluído com sucesso',
+            'error'
+          );
         },
-        error: (err) =>{
+        error: (err) => {
           console.error(`Erro ao excluir ${this.routePrefix}:`, err);
           this.isLoading = false;
-        }
+        },
       });
     }
   }
 
   saveItem(item: T): void {
+    if (this.informarCamposObrigatorios(item) > 0) {
+      return;
+    }
+
     const idField = this.getIdField(this.routePrefix);
     const id = (item as any)[idField];
 
@@ -82,26 +93,32 @@ export abstract class BaseComponent<T> implements OnInit {
       this.isLoading = true;
       this.service.update(id, item).subscribe({
         next: () => {
-          SnackBarMessageComponent.show(this.routePrefix + ' atualizado com sucesso', 'warning');
+          SnackBarMessageComponent.show(
+            this.routePrefix + ' atualizado com sucesso',
+            'warning'
+          );
           this.resetForm();
           this.isLoading = false;
         },
-        error: (err) =>{
+        error: (err) => {
           console.error(`Erro ao atualizar ${this.routePrefix}:`, err);
           this.isLoading = false;
-        }
+        },
       });
     } else {
       this.service.add(item).subscribe({
         next: () => {
           this.isLoading = false;
-          SnackBarMessageComponent.show(this.routePrefix + ' cadastrado com sucesso', 'success');
-          this.resetForm()
+          SnackBarMessageComponent.show(
+            this.routePrefix + ' cadastrado com sucesso',
+            'success'
+          );
+          this.resetForm();
         },
-        error: (err) =>{
+        error: (err) => {
           console.error(`Erro ao adicionar ${this.routePrefix}:`, err);
           this.isLoading = false;
-        }
+        },
       });
     }
   }
@@ -114,13 +131,45 @@ export abstract class BaseComponent<T> implements OnInit {
 
   private getIdField(routePrefix: string): string {
     const idFields: { [key: string]: string } = {
-      'livro': 'codL',
-      'autor': 'codAu',
-      'assunto': 'codAs',
-      'venda': 'codV',
+      livro: 'codL',
+      autor: 'codAu',
+      assunto: 'codAs',
+      venda: 'codV',
       'forma de compra': 'codFC',
-      'forma de pagamento': 'codFP'
+      'forma de pagamento': 'codFP',
     };
     return idFields[routePrefix];
+  }
+
+  informarCamposObrigatorios(item: T): number {
+    let retorno = 0;
+    this.validationErrors = this.validateItem(item);
+    if (this.validationErrors.length > 0) {
+      SnackBarMessageComponent.show(
+        'Por favor, preencha os campos obrigatórios',
+        'error'
+      );
+      retorno = this.validationErrors.length;
+    }
+    return retorno;
+  }
+
+  private validateItem(item: T): string[] {
+    const errors: string[] = [];
+    if (!item) return ['Item não pode ser nulo'];
+
+    this.requiredFields.forEach((field) => {
+      const value = (item as any)[field];
+      if (
+        value === null ||
+        value === undefined ||
+        value === '' ||
+        value === 0 ||
+        (Array.isArray(value) && value.length === 0)
+      ) {
+        errors.push(field);
+      }
+    });
+    return errors;
   }
 }

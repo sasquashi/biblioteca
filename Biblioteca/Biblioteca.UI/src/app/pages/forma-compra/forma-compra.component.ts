@@ -16,7 +16,7 @@ export class FormaCompraComponent extends BaseComponent<FormaCompra> {
     router: Router,
     snackBar: MatSnackBar
   ) {
-    super(service, router, 'forma de compra', snackBar);
+    super(service, router, 'forma de compra', snackBar, ['descricao']);
     this.selectedItem = { codFC: 0, descricao: '' };
   }
   override ngOnInit(): void {

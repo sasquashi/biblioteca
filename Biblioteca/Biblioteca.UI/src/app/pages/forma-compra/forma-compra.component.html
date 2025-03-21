@@ -26,7 +26,14 @@
       <form (ngSubmit)="saveItem(selectedItem!)">
         <div class="mb-3">
           <label class="form-label">Descrição</label>
-          <input type="text" class="form-control" [(ngModel)]="selectedItem.descricao" name="descricao" required>
+          <input 
+          type="text" 
+          class="form-control" 
+          [(ngModel)]="selectedItem.descricao" 
+          name="descricao" 
+          maxlength="30"
+          [ngClass]="{'is-invalid': validationErrors.includes('descricao')}"
+          required>
         </div>
         <button type="submit" class="btn btn-primary">Salvar</button>
         <button type="button" class="btn btn-secondary ms-2" (click)="resetForm()">Cancelar</button>

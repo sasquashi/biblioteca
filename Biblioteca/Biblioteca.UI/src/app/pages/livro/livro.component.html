@@ -54,6 +54,7 @@
           [(ngModel)]="selectedItem.titulo"
           name="titulo"
           maxlength="40"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('titulo') }"
           required
         />
       </div>
@@ -65,6 +66,7 @@
           [(ngModel)]="selectedItem.editora"
           name="editora"
           maxlength="40"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('editora') }"
           required
         />
       </div>
@@ -75,6 +77,7 @@
           class="form-control"
           [(ngModel)]="selectedItem.edicao"
           name="edicao"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('edicao') }"
           required
         />
       </div>
@@ -85,6 +88,8 @@
           class="form-control"
           [(ngModel)]="selectedItem.anoPublicacao"
           name="anoPublicacao"
+          maxlength="4"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('anoPublicacao') }"
           required
         />
       </div>
@@ -96,6 +101,7 @@
           [(ngModel)]="selectedItem.valor"
           name="valor"
           step="0.01"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('valor') }"
           required
         />
       </div>
@@ -106,6 +112,7 @@
           class="form-control"
           [(ngModel)]="selectedItem.autorIds"
           name="autorIds"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('autorIds') }"
         >
           <option *ngFor="let autor of autores" [value]="autor.codAu">
             {{ autor.nome }}
@@ -119,6 +126,7 @@
           class="form-control"
           [(ngModel)]="selectedItem.assuntoIds"
           name="assuntoIds"
+          [ngClass]="{ 'is-invalid': validationErrors.includes('assuntoIds') }"
         >
           <option *ngFor="let assunto of assuntos" [value]="assunto.codAs">
             {{ assunto.descricao }}

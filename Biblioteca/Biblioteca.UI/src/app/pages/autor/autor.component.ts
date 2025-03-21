@@ -16,7 +16,7 @@ export class AutorComponent extends BaseComponent<Autor> {
     router: Router, 
     snackBar: MatSnackBar
   ) {
-    super(service, router, 'autor', snackBar);
+    super(service, router, 'autor', snackBar, ['nome']);
     this.selectedItem = { codAu: 0, nome: '' };
   }
 
