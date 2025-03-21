@@ -52,7 +52,6 @@ namespace Biblioteca.Application.Services
             livro.Edicao = dto.Edicao;
             livro.AnoPublicacao = dto.AnoPublicacao;
             livro.Valor = dto.Valor;
-            // Relacionamentos como LivroAutores e LivroAssuntos podem ser atualizados aqui se necessário
         }
 
         protected override int GetIdFromDto(LivroDTO dto)
