@@ -12,7 +12,7 @@
           <th>Valor Final</th>
           <th>Data Venda</th>
           <th>Forma Pagamento</th>
-          <th>Ações</th>
+          <th class="actions-header">Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -25,7 +25,7 @@
           <td>{{ venda.valorFinal | currency:'BRL' }}</td>
           <td>{{ venda.dataVenda | date:'dd/MM/yyyy' }}</td>
           <td>{{ getFormaPagamentoDescricao(venda.codFP) }}</td>
-          <td>
+          <td class="actions-column">
             <button class="btn btn-sm btn-warning" (click)="editItem(venda.codV)">Editar</button>
             <button class="btn btn-sm btn-danger ms-2" (click)="deleteItem(venda.codV)">Excluir</button>
           </td>

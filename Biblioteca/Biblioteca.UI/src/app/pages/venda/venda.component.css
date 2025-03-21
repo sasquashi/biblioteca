@@ -1,0 +1,18 @@
+.table {
+    width: 100%;
+  }
+  
+  .actions-header {
+    text-align: right;
+    padding-right: 50px;
+  }
+  
+  .actions-column {
+    text-align: right;
+    white-space: nowrap;
+  }
+  
+  .actions-column button {
+    margin-left: 5px;
+  }
+  

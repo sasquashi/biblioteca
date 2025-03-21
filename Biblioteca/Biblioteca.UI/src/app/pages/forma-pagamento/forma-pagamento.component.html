@@ -6,14 +6,14 @@
         <tr>
           <th>Código</th>
           <th>Descrição</th>
-          <th>Ações</th>
+          <th class="actions-header">Ações</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let forma of items">
           <td>{{ forma.codFP }}</td>
           <td>{{ forma.descricao }}</td>
-          <td>
+          <td class="actions-column">
             <button class="btn btn-sm btn-warning" (click)="editItem(forma.codFP)">Editar</button>
             <button class="btn btn-sm btn-danger ms-2" (click)="deleteItem(forma.codFP)">Excluir</button>
           </td>

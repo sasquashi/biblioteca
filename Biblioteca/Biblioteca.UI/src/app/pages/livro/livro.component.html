@@ -16,7 +16,7 @@
         <th>Ano</th>
         <th>Valor</th>
         <th>Data Cadastro</th>
-        <th>Ações</th>
+        <th class="actions-header">Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -28,7 +28,7 @@
         <td>{{ livro.anoPublicacao }}</td>
         <td>{{ livro.valor | currency : "BRL" }}</td>
         <td>{{ livro.dataCadastro | date : "dd/MM/yyyy" }}</td>
-        <td>
+        <td class="actions-column">
           <button class="btn btn-sm btn-warning" (click)="editItem(livro.codL)">
             Editar
           </button>

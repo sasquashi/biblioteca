@@ -11,14 +11,14 @@
       <tr>
         <th>Código</th>
         <th>Nome</th>
-        <th>Ações</th>
+        <th class="actions-header">Ações</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let autor of items">
         <td>{{ autor.codAu }}</td>
         <td>{{ autor.nome }}</td>
-        <td>
+        <td class="actions-column">
           <button
             class="btn btn-sm btn-warning"
             (click)="editItem(autor.codAu)"

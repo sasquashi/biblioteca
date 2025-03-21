@@ -47,3 +47,7 @@
 <div class="container mt-3">
   <router-outlet></router-outlet>
 </div>
+<div *ngIf="isLoading" class="loading-overlay">
+  <div class="spinner"></div>
+  <span>Carregando...</span>
+</div>

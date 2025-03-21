@@ -8,10 +8,12 @@ import { RelatorioService } from './services/relatorio.service';
 })
 export class AppComponent {
   title = 'Biblioteca.UI';
+  isLoading = false;
 
   constructor(private relatorioService: RelatorioService) {}
 
   generateRelatorioLivrosPorAutor(): void {
+    this.isLoading = true;
     this.relatorioService.getRelatorioLivrosPorAutor().subscribe({
       next: (blob) => {
         const url = window.URL.createObjectURL(blob);
@@ -20,8 +22,12 @@ export class AppComponent {
         a.download = 'RelatorioLivrosPorAutor.pdf';
         a.click();
         window.URL.revokeObjectURL(url);
+        this.isLoading = false;
       },
-      error: (err) => console.error('Erro ao gerar relatório:', err),
+      error: (err) => {
+        console.error('Erro ao gerar relatório:', err);
+        this.isLoading = false;
+      },
     });
   }
 }

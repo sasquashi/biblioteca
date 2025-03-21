@@ -11,14 +11,14 @@
       <tr>
         <th>Código</th>
         <th>Descrição</th>
-        <th>Ações</th>
+        <th class="actions-header">Ações</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let assunto of items">
         <td>{{ assunto.codAs }}</td>
         <td>{{ assunto.descricao }}</td>
-        <td>
+        <td class="actions-column">
           <button
             class="btn btn-sm btn-warning"
             (click)="editItem(assunto.codAs)"

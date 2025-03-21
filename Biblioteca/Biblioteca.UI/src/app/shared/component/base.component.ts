@@ -9,7 +9,8 @@ export abstract class BaseComponent<T> implements OnInit {
   items: T[] = [];
   selectedItem: T | null = null;
   isEdit = false;
-  
+  isLoading = false;
+
   constructor(
     protected service: BaseService<T>,
     protected router: Router,
@@ -24,32 +25,51 @@ export abstract class BaseComponent<T> implements OnInit {
   }
 
   loadItems(): void {
+    this.isLoading = true;
     this.service.getAll().subscribe({
-      next: (data) => (this.items = data),
-      error: (err) =>
-        console.error(`Erro ao carregar ${this.routePrefix}:`, err),
+      next: (data) => {
+        this.items = data.sort((a, b) => {
+          const idField = this.getIdField(this.routePrefix);
+          const idA = (a as any)[idField];
+          const idB = (b as any)[idField];
+          return idB - idA;
+        });
+        this.isLoading = false;
+      },
+      error: (err) =>{
+        console.error(`Erro ao carregar ${this.routePrefix}:`, err);
+        this.isLoading = false;
+      }
     });
   }
 
   editItem(id: number): void {
+    this.isLoading = true;
     this.service.getById(id).subscribe({
       next: (data) => {
         this.selectedItem = data;
         this.isEdit = true;
+        this.isLoading = false;
       },
-      error: (err) => console.error('Erro ao carregar item:', err),
+      error: (err) => {console.error('Erro ao carregar item:', err);
+        this.isLoading = false;
+      }
     });
   }
 
   deleteItem(id: number): void {
     if (confirm(`Tem certeza que deseja excluir este ${this.routePrefix}?`)) {
+      this.isLoading = true;
       this.service.delete(id).subscribe({
         next: () => {
+          this.isLoading = false;
           this.loadItems()
           SnackBarMessageComponent.show(this.routePrefix + ' excluído com sucesso', 'error');
         },
-        error: (err) =>
-          console.error(`Erro ao excluir ${this.routePrefix}:`, err),
+        error: (err) =>{
+          console.error(`Erro ao excluir ${this.routePrefix}:`, err);
+          this.isLoading = false;
+        }
       });
     }
   }
@@ -59,22 +79,29 @@ export abstract class BaseComponent<T> implements OnInit {
     const id = (item as any)[idField];
 
     if (this.isEdit) {
+      this.isLoading = true;
       this.service.update(id, item).subscribe({
         next: () => {
           SnackBarMessageComponent.show(this.routePrefix + ' atualizado com sucesso', 'warning');
-          this.resetForm()
+          this.resetForm();
+          this.isLoading = false;
         },
-        error: (err) =>
-          console.error(`Erro ao atualizar ${this.routePrefix}:`, err),
+        error: (err) =>{
+          console.error(`Erro ao atualizar ${this.routePrefix}:`, err);
+          this.isLoading = false;
+        }
       });
     } else {
       this.service.add(item).subscribe({
         next: () => {
+          this.isLoading = false;
           SnackBarMessageComponent.show(this.routePrefix + ' cadastrado com sucesso', 'success');
           this.resetForm()
         },
-        error: (err) =>
-          console.error(`Erro ao adicionar ${this.routePrefix}:`, err),
+        error: (err) =>{
+          console.error(`Erro ao adicionar ${this.routePrefix}:`, err);
+          this.isLoading = false;
+        }
       });
     }
   }
