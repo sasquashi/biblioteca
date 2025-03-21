@@ -16,6 +16,10 @@ namespace Biblioteca.Infra.Data.Context
         public DbSet<HistoricoVenda> HistoricoVendas { get; set; }
         public DbSet<HistoricoAcao> HistoricoAcoes { get; set; }
 
+
+        public BibliotecaDbContext()
+        {
+        }
         public BibliotecaDbContext(DbContextOptions<BibliotecaDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

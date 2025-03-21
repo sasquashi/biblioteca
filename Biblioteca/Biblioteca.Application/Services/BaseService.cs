@@ -16,6 +16,12 @@ namespace Biblioteca.Application.Services
         protected readonly HistoricoAcaoService _historicoAcaoService;
         protected readonly HistoricoVendaService _historicoVendaService;
 
+        public BaseService()
+        {
+            //necessidade de criar um construtor vazio para poder resolver os erros do projeto de testes. Sem ele todos os testes quebram
+            //pois o moq precisa para poder mockar as coisas.
+        }
+
         protected BaseService(
                     IRepositoryBase<T> repository,
                     HistoricoAcaoService historicoAcaoService,

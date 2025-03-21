@@ -8,6 +8,11 @@ namespace Biblioteca.Application.Services
     {
         private readonly IHistoricoVendaRepository _historicoVendaRepository;
 
+        public HistoricoVendaService()
+        {
+                    
+        }
+
         public HistoricoVendaService(IHistoricoVendaRepository historicoVendaRepository)
         {
             _historicoVendaRepository = historicoVendaRepository;
