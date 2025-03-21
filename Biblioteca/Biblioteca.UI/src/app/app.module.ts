@@ -11,6 +11,9 @@ import { LivroComponent } from './pages/livro/livro.component';
 import { FormaCompraComponent } from './pages/forma-compra/forma-compra.component';
 import { FormaPagamentoComponent } from './pages/forma-pagamento/forma-pagamento.component';
 import { VendaComponent } from './pages/venda/venda.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { SnackBarMessageComponent } from './shared/snack-bar-message/snack-bar-message.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
 declarations: [
@@ -21,15 +24,19 @@ declarations: [
     LivroComponent,
     FormaPagamentoComponent,
     FormaCompraComponent,
-    VendaComponent
+    VendaComponent,
+    SnackBarMessageComponent
 ],
 imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSnackBarModule
 ],
-providers: [],
+providers: [
+    provideAnimationsAsync()
+  ],
 bootstrap: [AppComponent]
 })
 

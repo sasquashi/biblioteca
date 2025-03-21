@@ -1,0 +1,52 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$Biblioteca-UI-primary: mat.define-palette(mat.$indigo-palette);
+$Biblioteca-UI-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$Biblioteca-UI-warn: mat.define-palette(mat.$red-palette);
+
+$Biblioteca-UI-theme: mat.define-light-theme((
+  color: (
+    primary: $Biblioteca-UI-primary,
+    accent: $Biblioteca-UI-accent,
+    warn: $Biblioteca-UI-warn,
+  )
+));
+
+// Inclui os estilos do tema para todos os componentes, se o sistema um dia chegar a evoluir descomentar esse include. 
+// Agora estava gerando conflito nas minhas personalizações do snackbar.
+//@include mat.all-component-themes($Biblioteca-UI-theme);
+
+
+.mat-mdc-snack-bar-container.snack-success {
+  background-color: #28a745 !important; 
+}
+
+.mat-mdc-snack-bar-container.snack-warning {
+  background-color: #ffc107 !important; 
+}
+
+.mat-mdc-snack-bar-container.snack-error {
+  background-color: #dc3545 !important; 
+}
+
+.mat-mdc-snack-bar-container.snack-success span {
+  color: white !important;
+}
+
+.mat-mdc-snack-bar-container.snack-warning span {
+  color: black !important;
+}
+
+.mat-mdc-snack-bar-container.snack-error span {
+  color: white !important;
+}
+
+.mat-mdc-snack-bar-container span {
+  display: block;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

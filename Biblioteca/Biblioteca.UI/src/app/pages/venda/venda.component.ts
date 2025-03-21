@@ -9,11 +9,12 @@ import { FormaPagamentoService } from '../../services/forma-pagamento.service';
 import { Livro } from '../../models/livro';
 import { FormaCompra } from '../../models/forma-compra';
 import { FormaPagamento } from '../../models/forma-pagamento';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-venda',
   templateUrl: './venda.component.html',
-  styleUrls: ['./venda.component.scss'],
+  styleUrls: ['./venda.component.css'],
 })
 export class VendaComponent extends BaseComponent<Venda> {
   livros: Livro[] = [];
@@ -25,9 +26,10 @@ export class VendaComponent extends BaseComponent<Venda> {
     router: Router,
     private livroService: LivroService,
     private formaCompraService: FormaCompraService,
-    private formaPagamentoService: FormaPagamentoService
+    private formaPagamentoService: FormaPagamentoService,
+    snackBar: MatSnackBar
   ) {
-    super(service, router, 'venda');
+    super(service, router, 'venda', snackBar);
     this.selectedItem = {
       codV: 0,
       codFC: 0,

@@ -7,6 +7,7 @@ import { LivroService } from '../../services/livro.service';
 import { Router } from '@angular/router';
 import { AutorService } from '../../services/autor.service';
 import { AssuntoService } from '../../services/assunto.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-livro',
@@ -21,9 +22,10 @@ export class LivroComponent extends BaseComponent<Livro> {
     service: LivroService,
     router: Router,
     private autorService: AutorService,
-    private assuntoService: AssuntoService
+    private assuntoService: AssuntoService,
+    snackBar: MatSnackBar
   ) {
-    super(service, router, 'livro');
+    super(service, router, 'livro', snackBar);
     this.selectedItem = {
       codL: 0,
       titulo: '',
