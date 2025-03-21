@@ -13,8 +13,9 @@ const routes: Routes = [
   { path: 'assuntos', component: AssuntoComponent },
   { path: 'autores', component: AutorComponent },
   { path: 'livros', component: LivroComponent },
-  { path: 'formas-pagamento', component: FormaPagamentoComponent },
-
+  { path: 'vendas', component: VendaComponent },
+  { path: 'formas-compra', component: FormaCompraComponent },
+  { path: 'formas-pagamento', component: FormaPagamentoComponent }
 ];
 
 @NgModule({
