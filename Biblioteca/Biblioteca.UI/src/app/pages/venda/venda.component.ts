@@ -66,6 +66,21 @@ export class VendaComponent extends BaseComponent<Venda> {
       .subscribe({ next: (data) => (this.formasPagamento = data) });
   }
 
+  getLivroTitulo(codL: number): string {
+    const livro = this.livros.find((l) => l.codL === codL);
+    return livro ? livro.titulo : `Livro ${codL}`;
+  }
+
+  getFormaCompraDescricao(codFC: number): string {
+    const forma = this.formasCompra.find((fc) => fc.codFC === codFC);
+    return forma ? forma.descricao : `Forma ${codFC}`;
+  }
+
+  getFormaPagamentoDescricao(codFP: number): string {
+    const forma = this.formasPagamento.find((fp) => fp.codFP === codFP);
+    return forma ? forma.descricao : `Forma ${codFP}`;
+  }
+
   addNewItem(): void {
     this.selectedItem = {
       codV: 0,

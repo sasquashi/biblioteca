@@ -18,13 +18,13 @@
       <tbody>
         <tr *ngFor="let venda of items">
           <td>{{ venda.codV }}</td>
-          <td>{{ venda.codL }}</td>
-          <td>{{ venda.codFC }}</td>
+          <td>{{ getLivroTitulo(venda.codL) }}</td>
+          <td>{{ getFormaCompraDescricao(venda.codFC) }}</td>
           <td>{{ venda.valorLivro | currency:'BRL' }}</td>
           <td>{{ venda.teveDesconto ? 'Sim' : 'Não' }}</td>
           <td>{{ venda.valorFinal | currency:'BRL' }}</td>
           <td>{{ venda.dataVenda | date:'dd/MM/yyyy' }}</td>
-          <td>{{ venda.codFP }}</td>
+          <td>{{ getFormaPagamentoDescricao(venda.codFP) }}</td>
           <td>
             <button class="btn btn-sm btn-warning" (click)="editItem(venda.codV)">Editar</button>
             <button class="btn btn-sm btn-danger ms-2" (click)="deleteItem(venda.codV)">Excluir</button>
