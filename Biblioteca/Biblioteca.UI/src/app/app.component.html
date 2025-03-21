@@ -32,6 +32,14 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/formas-pagamento">Formas de Pagamento</a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="relatoriosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Relatórios
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="relatoriosDropdown">
+            <li><a class="dropdown-item" (click)="generateRelatorioLivrosPorAutor()">Livros por Autor</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>

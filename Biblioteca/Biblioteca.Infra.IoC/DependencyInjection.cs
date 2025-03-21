@@ -2,6 +2,9 @@
 using Biblioteca.Domain.Interfaces;
 using Biblioteca.Infra.Data.Context;
 using Biblioteca.Infra.Data.Repositories;
+using jsreport.AspNetCore;
+using jsreport.Local;    
+using jsreport.Binary;   
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +25,7 @@ namespace Biblioteca.Infra.IoC
             services.AddScoped<IFormaPagamentoRepository, FormaPagamentoRepository>();
             services.AddScoped<IHistoricoVendaRepository, HistoricoVendaRepository>();
             services.AddScoped<IHistoricoAcaoRepository, HistoricoAcaoRepository>();
+            services.AddScoped<IRelatorioRepository, RelatorioRepository>();
 
             services.AddScoped<LivroService>();
             services.AddScoped<AutorService>();
@@ -31,6 +35,12 @@ namespace Biblioteca.Infra.IoC
             services.AddScoped<FormaPagamentoService>();
             services.AddScoped<HistoricoVendaService>();
             services.AddScoped<HistoricoAcaoService>();
+            services.AddScoped<RelatorioService>();
+
+            services.AddJsReport(new jsreport.Local.LocalReporting()
+                .UseBinary(jsreport.Binary.JsReportBinary.GetBinary())
+                .AsUtility()
+                .Create());
 
             return services;
         }

@@ -43,18 +43,16 @@ namespace Biblioteca.Application.Services
             var entity = MapToEntity(dto);
             await _repository.AddAsync(entity);
 
-            // Registra em HistoricoAcao para todas as entidades
             var historicoAcao = new HistoricoAcao
             {
                 TabelaAfetada = typeof(T).Name,
                 TipoAcao = "INSERT",
                 DescricaoAcao = $"Ação INSERT na tabela {typeof(T).Name}.",
                 DataAcao = DateTime.Now,
-                UsuarioAcao = Environment.UserName // Substitua por autenticação, se houver
+                UsuarioAcao = Environment.UserName 
             };
             await _historicoAcaoService.AddAsync(historicoAcao);
 
-            // Registra em HistoricoVenda apenas se for Venda
             if (typeof(T) == typeof(Venda))
             {
                 var venda = entity as Venda;

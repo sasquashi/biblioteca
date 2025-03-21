@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="jsreport.AspNetCore" Version="3.8.1" />
+    <PackageReference Include="jsreport.Binary" Version="4.4.0" />
+    <PackageReference Include="jsreport.Local" Version="3.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Biblioteca.Domain\Biblioteca.Domain.csproj" />
   </ItemGroup>
 
