@@ -8,7 +8,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { AssuntoComponent } from './pages/assunto/assunto.component';
 import { AutorComponent } from './pages/autor/autor.component';
 import { LivroComponent } from './pages/livro/livro.component';
+import { FormaCompraComponent } from './pages/forma-compra/forma-compra.component';
 import { FormaPagamentoComponent } from './pages/forma-pagamento/forma-pagamento.component';
+import { VendaComponent } from './pages/venda/venda.component';
 
 @NgModule({
 declarations: [
@@ -18,6 +20,8 @@ declarations: [
     AutorComponent,
     LivroComponent,
     FormaPagamentoComponent,
+    FormaCompraComponent,
+    VendaComponent
 ],
 imports: [
     BrowserModule,
