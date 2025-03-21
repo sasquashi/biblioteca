@@ -1,0 +1,73 @@
+<div class="container mt-4">
+    <h2>Vendas</h2>
+    <button class="btn btn-primary mb-3" (click)="addNewItem();">Adicionar Venda</button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Livro</th>
+          <th>Forma Compra</th>
+          <th>Valor Livro</th>
+          <th>Desconto</th>
+          <th>Valor Final</th>
+          <th>Data Venda</th>
+          <th>Forma Pagamento</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let venda of items">
+          <td>{{ venda.codV }}</td>
+          <td>{{ venda.codL }}</td>
+          <td>{{ venda.codFC }}</td>
+          <td>{{ venda.valorLivro | currency:'BRL' }}</td>
+          <td>{{ venda.teveDesconto ? 'Sim' : 'Não' }}</td>
+          <td>{{ venda.valorFinal | currency:'BRL' }}</td>
+          <td>{{ venda.dataVenda | date:'dd/MM/yyyy' }}</td>
+          <td>{{ venda.codFP }}</td>
+          <td>
+            <button class="btn btn-sm btn-warning" (click)="editItem(venda.codV)">Editar</button>
+            <button class="btn btn-sm btn-danger ms-2" (click)="deleteItem(venda.codV)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="selectedItem" class="mt-4">
+      <h3>{{ isEdit ? 'Editar Venda' : 'Adicionar Venda' }}</h3>
+      <form (ngSubmit)="saveItem(selectedItem!)">
+        <div class="mb-3">
+          <label class="form-label">Livro</label>
+          <select class="form-control" [(ngModel)]="selectedItem.codL" name="codL" required>
+            <option *ngFor="let livro of livros" [value]="livro.codL">{{ livro.titulo }}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Forma de Compra</label>
+          <select class="form-control" [(ngModel)]="selectedItem.codFC" name="codFC" required>
+            <option *ngFor="let forma of formasCompra" [value]="forma.codFC">{{ forma.descricao }}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Valor Livro</label>
+          <input type="number" class="form-control" [(ngModel)]="selectedItem.valorLivro" name="valorLivro" step="0.01" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Teve Desconto</label>
+          <input type="checkbox" [(ngModel)]="selectedItem.teveDesconto" name="teveDesconto">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Valor Final</label>
+          <input type="number" class="form-control" [(ngModel)]="selectedItem.valorFinal" name="valorFinal" step="0.01" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Forma de Pagamento</label>
+          <select class="form-control" [(ngModel)]="selectedItem.codFP" name="codFP" required>
+            <option *ngFor="let forma of formasPagamento" [value]="forma.codFP">{{ forma.descricao }}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="button" class="btn btn-secondary ms-2" (click)="resetForm()">Cancelar</button>
+      </form>
+    </div>
+  </div>
