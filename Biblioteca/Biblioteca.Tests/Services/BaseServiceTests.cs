@@ -47,8 +47,6 @@ namespace Biblioteca.Tests.Services
             _repositoryMock.Setup(r => r.GetByIdAsync(1)).ReturnsAsync((TestEntity)null);
             await Assert.ThrowsAsync<Exception>(() => _service.UpdateAsync(dto));
         }
-
-        //continuar demais testes
     }
 
     public class TestEntity { public int Id { get; set; } }

@@ -94,9 +94,9 @@
           class="form-control teve-desconto-select"
           [ngClass]="{ 'is-invalid': validationErrors.includes('teveDesconto')}"
         >
-          <option value="undefined">Selecione</option>
-          <option value="true">Sim</option>
-          <option value="false">Não</option>
+          <option [ngValue]="null">Selecione</option>
+          <option [ngValue]="true">Sim</option>
+          <option [ngValue]="false">Não</option>
         </select>
       </div>
       <div class="mb-3">

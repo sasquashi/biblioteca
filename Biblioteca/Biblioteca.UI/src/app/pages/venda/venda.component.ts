@@ -10,6 +10,7 @@ import { Livro } from '../../models/livro';
 import { FormaCompra } from '../../models/forma-compra';
 import { FormaPagamento } from '../../models/forma-pagamento';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarMessageComponent } from '../../shared/snack-bar-message/snack-bar-message.component';
 
 @Component({
   selector: 'app-venda',
@@ -37,7 +38,7 @@ export class VendaComponent extends BaseComponent<Venda> {
       valorLivro: 0,
       teveDesconto: undefined,
       valorFinal: 0,
-      dataVenda: new Date().toISOString().split('T')[0],
+      dataVenda: new Date().toISOString(),
       codFP: 0,
     };
   }
@@ -91,9 +92,61 @@ export class VendaComponent extends BaseComponent<Venda> {
       valorLivro: 0,
       teveDesconto: undefined,
       valorFinal: 0,
-      dataVenda: new Date().toISOString().split('T')[0],
+      dataVenda: new Date().toISOString(),
       codFP: 0,
     };
     this.isEdit = false;
+  }
+
+  isFormValid(): boolean {
+    if (!this.selectedItem) {
+      return false;
+    }
+    return (
+      this.selectedItem.codFC > 0 &&
+      this.selectedItem.codL > 0 &&
+      this.selectedItem.codFP > 0 &&
+      this.selectedItem.valorLivro > 0 &&
+      this.selectedItem.valorFinal > 0
+    );
+  }
+
+  override saveItem(item: Venda): void {
+    if (!this.isFormValid()) {
+      return;
+    }
+    this.isLoading = true;
+    if (this.isEdit) {
+      this.service.update(item.codV, item).subscribe({
+        next: () => {
+          this.isLoading = false;
+          SnackBarMessageComponent.show(
+            this.routePrefix + ' atualizado com sucesso',
+            'success'
+          );
+          this.resetForm();
+        },
+        error: (err) => {
+          console.error(`Erro ao atualizar ${this.routePrefix}:`, err);
+          this.isLoading = false;
+        },
+      });
+    } else {
+      const { codV, ...itemWithoutId } = item;
+      this.service.add(itemWithoutId as Venda).subscribe({
+        next: () => {
+          this.isLoading = false;
+          SnackBarMessageComponent.show(
+            this.routePrefix + ' cadastrado com sucesso',
+            'success'
+          );
+          this.resetForm();
+        },
+        error: (err) => {
+          console.error(`Erro ao adicionar ${this.routePrefix}:`, err);
+          this.isLoading = false;
+        },
+      });
+    }
   }
 }
