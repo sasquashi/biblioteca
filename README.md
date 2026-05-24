@@ -1,5 +1,5 @@
 # Biblioteca
-Projeto originalmete criado para atender ao Desafio técnico para analista .net Sênior da empresa Basis.
+Projeto originalmete criado para atender ao Desafio técnico para analista .net Sênior.
 
 O sistema de biblioteca é para gerenciamento de livros e vendas, desenvolvido com .NET Core e Angular.
 
